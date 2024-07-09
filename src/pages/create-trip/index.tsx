@@ -1,6 +1,8 @@
 import { FormEvent, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
+import { ConfirmTripModal } from "./confirm-trip-modal"
+import { DestinationAndDateStep } from "./steps/destination-and-date-step"
 import { InviteGuestsModal } from "./invite-guest-modal"
 import { InviteGuestsStep } from "./steps/invite-guest-step"
 
@@ -8,6 +10,7 @@ export function CreateTripPage() {
   const navigate = useNavigate()
   const [isGuestsInputOpen, setIsGuestsInputOpen] = useState(false)
   const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
+  const [isConfirmTripModalOpen, setIsConfirmTripModalOpen] = useState(false)
   const [emailsToInvite, setEmailsToInvite] = useState(["email@example.com"])
 
   function openGuestsInput() {
@@ -26,6 +29,13 @@ export function CreateTripPage() {
     setIsGuestsModalOpen(false)
   }
 
+  function openConfirmTripModal() {
+    setIsConfirmTripModalOpen(true)
+  }
+
+  function closeConfirmTripModal() {
+    setIsConfirmTripModalOpen(false)
+  }
 
   function addNewEmailToInvite(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -52,6 +62,12 @@ export function CreateTripPage() {
     )
 
     setEmailsToInvite(newEmailList)
+  }
+
+  function createTrip(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
+    navigate("/trips/123")
   }
 
   return (
@@ -104,6 +120,12 @@ export function CreateTripPage() {
         />
       )}
 
+      {isConfirmTripModalOpen && (
+        <ConfirmTripModal
+          closeConfirmTripModal={closeConfirmTripModal}
+          createTrip={createTrip}
+        />
+      )}
     </div>
   )
 }
