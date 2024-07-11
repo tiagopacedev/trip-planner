@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { MapPin, Calendar, Settings2, ArrowRight, X } from "lucide-react"
-import { format } from "date-fns"
+import { format, isSameMonth } from "date-fns"
 import { Button } from "../../../components/button"
 import { DateRange, DayPicker } from "react-day-picker"
 import "react-day-picker/dist/style.css"
@@ -36,9 +36,13 @@ export function DestinationAndDateStep({
     eventStartAndEndDates &&
     eventStartAndEndDates.from &&
     eventStartAndEndDates.to
-      ? format(eventStartAndEndDates.from, "d' de 'LLL")
-          .concat(" até ")
-          .concat(format(eventStartAndEndDates.to, "d' de 'LLL"))
+      ? isSameMonth(eventStartAndEndDates.from, eventStartAndEndDates.to)
+        ? format(eventStartAndEndDates.from, "d")
+            .concat(" até ")
+            .concat(format(eventStartAndEndDates.to, "d' de 'LLL"))
+        : format(eventStartAndEndDates.from, "d' de 'LLL")
+            .concat(" até ")
+            .concat(format(eventStartAndEndDates.to, "d' de 'LLL"))
       : null
 
   return (

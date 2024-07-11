@@ -3,7 +3,7 @@ import { Button } from "../../components/button"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { api } from "../../lib/axios"
-import { format } from "date-fns"
+import { format, isSameMonth } from "date-fns"
 import { UpdateTripModal } from "./update-trip-modal"
 
 export interface Trip {
@@ -32,9 +32,13 @@ export function DestinationAndDateHeader() {
   }, [tripId])
 
   const displayedDate = trip
-    ? format(trip.starts_at, "d' de 'LLL")
-        .concat(" até ")
-        .concat(format(trip.ends_at, "d' de 'LLL"))
+    ? isSameMonth(trip.starts_at, trip.ends_at)
+      ? format(trip.starts_at, "d")
+          .concat(" até ")
+          .concat(format(trip.ends_at, "d' de 'LLL"))
+      : format(trip.starts_at, "d' de 'LLL")
+          .concat(" até ")
+          .concat(format(trip.ends_at, "d' de 'LLL"))
     : null
 
   return (
