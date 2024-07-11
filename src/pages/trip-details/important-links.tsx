@@ -47,7 +47,6 @@ export function ImportantLinks() {
           >
             <div className="space-y-1.5">
               <span className="block font-medium text-zinc-100">
-                Reserva do AirBnB
                 {link.title ?? "Link"}
               </span>
               <a
@@ -59,7 +58,7 @@ export function ImportantLinks() {
             </div>
 
             <Link2
-              className="size-5 shrink-0 text-zinc-400 hover:text-zinc-200"
+              className="size-5 shrink-0 text-zinc-400 hover:cursor-pointer hover:text-zinc-200"
               onClick={() => copyToClipboard(link.url)}
             />
           </div>
