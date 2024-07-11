@@ -38,32 +38,34 @@ export function DestinationAndDateHeader() {
     : null
 
   return (
-    <div className="shadow-shape flex h-16 items-center justify-between rounded-xl bg-zinc-900 px-4">
+    <div className="shadow-shape flex h-16 items-center justify-between rounded-xl bg-zinc-900 px-4 max-md:gap-4">
       <div className="flex items-center gap-2">
-        <MapPin className="size-5 text-zinc-400" />
-        <span className="text-zinc-100">{trip?.destination}</span>
+        <MapPin className="size-5 shrink-0 text-zinc-400" />
+        <span className="text-zinc-100 max-md:text-sm">
+          {trip?.destination}
+        </span>
       </div>
 
-      <div className="flex items-center gap-5">
+      <div className="flex items-center gap-5 max-md:gap-3">
         <div className="flex items-center gap-2">
-          <Calendar className="size-5 text-zinc-400" />
-          <span className="text-zinc-100">{displayedDate}</span>
+          <Calendar className="size-5 text-zinc-400 max-md:hidden" />
+          <span className="text-zinc-100 max-md:text-sm">{displayedDate}</span>
         </div>
 
-        <div className="h-6 w-px bg-zinc-800" />
+        <div className="h-6 w-px bg-zinc-800 max-md:hidden" />
 
         <Button variant="secondary" onClick={openUpdateLinkModal}>
-          Alterar local/data
-          <Settings2 className="size-5" />
+          <span className="max-md:hidden"> Alterar local/data</span>
+          <Settings2 className="size-5 shrink-0" />
         </Button>
-
-        {isUpdateLinkModalOpen && (
-          <UpdateTripModal
-            trip={trip}
-            closeUpdateTripModal={closeUpdateLinkModal}
-          />
-        )}
       </div>
+
+      {isUpdateLinkModalOpen && (
+        <UpdateTripModal
+          trip={trip}
+          closeUpdateTripModal={closeUpdateLinkModal}
+        />
+      )}
     </div>
   )
 }

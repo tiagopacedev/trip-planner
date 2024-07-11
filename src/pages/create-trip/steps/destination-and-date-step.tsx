@@ -42,8 +42,8 @@ export function DestinationAndDateStep({
       : null
 
   return (
-    <div className="shadow-shape flex h-16 items-center gap-3 rounded-xl bg-zinc-900 px-4">
-      <div className="flex flex-1 items-center gap-2">
+    <div className="shadow-shape flex h-16 items-center gap-3 rounded-xl bg-zinc-900 px-4 max-md:h-full max-md:flex-col max-md:p-4">
+      <div className="flex flex-1 items-center gap-2 max-md:w-full max-md:py-2">
         <MapPin className="size-5 text-zinc-400" />
         <input
           disabled={isGuestsInputOpen}
@@ -57,7 +57,7 @@ export function DestinationAndDateStep({
       <button
         disabled={isGuestsInputOpen}
         onClick={openDatePicker}
-        className="flex w-[240px] items-center gap-2 text-left"
+        className="flex w-[240px] items-center gap-2 text-left max-md:w-full max-md:py-2"
       >
         <Calendar className="size-5 text-zinc-400" />
         <span className="w-40 flex-1 text-lg text-zinc-400">
@@ -89,15 +89,19 @@ export function DestinationAndDateStep({
         </div>
       )}
 
-      <div className="h-6 w-px bg-zinc-800" />
+      <div className="h-6 w-px bg-zinc-800 max-md:hidden" />
 
       {isGuestsInputOpen ? (
-        <Button onClick={closeGuestsInput} variant="secondary">
+        <Button
+          size="responsive"
+          onClick={closeGuestsInput}
+          variant="secondary"
+        >
           Alterar local/data
           <Settings2 className="size-5" />
         </Button>
       ) : (
-        <Button onClick={openGuestsInput}>
+        <Button size="responsive" onClick={openGuestsInput}>
           Continuar
           <ArrowRight className="size-5" />
         </Button>
