@@ -4,8 +4,9 @@ import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { api } from "../../lib/axios"
 import { format } from "date-fns"
+import { UpdateTripModal } from "./update-trip-modal"
 
-interface Trip {
+export interface Trip {
   id: string
   destination: string
   starts_at: string
@@ -16,6 +17,15 @@ interface Trip {
 export function DestinationAndDateHeader() {
   const { tripId } = useParams()
   const [trip, setTrip] = useState<Trip | undefined>()
+  const [isUpdateLinkModalOpen, setIsUpdateLinkModalOpen] = useState(false)
+
+  function openUpdateLinkModal() {
+    setIsUpdateLinkModalOpen(true)
+  }
+
+  function closeUpdateLinkModal() {
+    setIsUpdateLinkModalOpen(false)
+  }
 
   useEffect(() => {
     api.get(`trips/${tripId}`).then((response) => setTrip(response.data.trip))
@@ -42,10 +52,17 @@ export function DestinationAndDateHeader() {
 
         <div className="h-6 w-px bg-zinc-800" />
 
-        <Button variant="secondary">
+        <Button variant="secondary" onClick={openUpdateLinkModal}>
           Alterar local/data
           <Settings2 className="size-5" />
         </Button>
+
+        {isUpdateLinkModalOpen && (
+          <UpdateTripModal
+            trip={trip}
+            closeUpdateTripModal={closeUpdateLinkModal}
+          />
+        )}
       </div>
     </div>
   )
