@@ -3,6 +3,7 @@ import { Button } from "../../components/button"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { api } from "@/lib/axios"
+import { CreateLinkModal } from "./create-link-modal"
 
 interface Link {
   id: string
@@ -12,17 +13,27 @@ interface Link {
 
 export function ImportantLinks() {
   const { tripId } = useParams()
+
   const [links, setLinks] = useState<Link[]>([])
+  const [isCreateLinkModalOpen, setIsCreateLinkModalOpen] = useState(false)
+
+  function openCreateLinkModal() {
+    setIsCreateLinkModalOpen(true)
+  }
+
+  function closeCreateLinkModal() {
+    setIsCreateLinkModalOpen(false)
+  }
+
+  const copyToClipboard = (url: string) => {
+    navigator.clipboard.writeText(url)
+  }
 
   useEffect(() => {
     api
       .get(`trips/${tripId}/links`)
       .then((response) => setLinks(response.data.links))
   }, [tripId])
-
-  const copyToClipboard = (url: string) => {
-    navigator.clipboard.writeText(url)
-  }
 
   return (
     <div className="space-y-6">
@@ -48,17 +59,21 @@ export function ImportantLinks() {
             </div>
 
             <Link2
-              className="size-5 shrink-0 text-zinc-400"
+              className="size-5 shrink-0 text-zinc-400 hover:text-zinc-200"
               onClick={() => copyToClipboard(link.url)}
             />
           </div>
         ))}
       </div>
 
-      <Button variant="secondary" size="full">
+      <Button variant="secondary" size="full" onClick={openCreateLinkModal}>
         <Plus className="size-5" />
         Cadastrar novo link
       </Button>
+
+      {isCreateLinkModalOpen && (
+        <CreateLinkModal closeCreateLinkModal={closeCreateLinkModal} />
+      )}
     </div>
   )
 }
