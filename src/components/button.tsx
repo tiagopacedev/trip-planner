@@ -6,7 +6,7 @@ const buttonVariants = tv({
 
   variants: {
     variant: {
-      primary: "bg-lime-300 text-lime-950 hover:bg-lime-400",
+      primary: "bg-rose-500 text-zinc-50 hover:bg-rose-400",
       secondary: "bg-zinc-800 text-zinc-200 hover:bg-zinc-700",
     },
 
@@ -15,11 +15,17 @@ const buttonVariants = tv({
       full: "w-full h-11",
       responsive: "max-md:w-full h-11",
     },
+
+    disabled: {
+      true: "bg-rose-500 text-zinc-100 cursor-not-allowed opacity-70",
+      false: "",
+    },
   },
 
   defaultVariants: {
     variant: "primary",
     size: "default",
+    disabled: false,
   },
 })
 
@@ -29,9 +35,19 @@ interface ButtonProps
   children: ReactNode
 }
 
-export function Button({ children, variant, size, ...rest }: ButtonProps) {
+export function Button({
+  children,
+  variant,
+  size,
+  disabled,
+  ...rest
+}: ButtonProps) {
   return (
-    <button {...rest} className={buttonVariants({ variant, size })}>
+    <button
+      {...rest}
+      className={buttonVariants({ variant, size, disabled })}
+      disabled={disabled}
+    >
       {children}
     </button>
   )

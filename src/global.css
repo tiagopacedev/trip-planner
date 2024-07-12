@@ -6,6 +6,13 @@
   min-width: 0;
 }
 
+.rdp-day_selected,
+.rdp-day_selected:focus-visible,
+.rdp-day_selected:hover,
+.rdp-button_reset.rdp-button.rdp-day:hover {
+  background-color: #f43f5e;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

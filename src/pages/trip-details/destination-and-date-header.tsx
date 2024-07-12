@@ -53,7 +53,7 @@ export function DestinationAndDateHeader() {
       <div className="flex items-center gap-5 max-md:gap-3">
         <div className="flex items-center gap-2">
           <Calendar className="size-5 text-zinc-400 max-md:hidden" />
-          <span className="text-zinc-100 max-md:text-sm">{displayedDate}</span>
+          <span className="text-zinc-100 max-md:text-sm">{displayedDate}.</span>
         </div>
 
         <div className="h-6 w-px bg-zinc-800 max-md:hidden" />

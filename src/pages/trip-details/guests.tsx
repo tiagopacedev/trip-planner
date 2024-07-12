@@ -52,7 +52,7 @@ export function Guests() {
             </div>
 
             {participant.is_confirmed ? (
-              <CheckCircle2 className="size-5 shrink-0 text-green-400" />
+              <CheckCircle2 className="size-5 shrink-0 text-rose-500" />
             ) : (
               <CircleDashed className="size-5 shrink-0 text-zinc-400" />
             )}
