@@ -55,19 +55,19 @@ export function InviteGuestsModal({
 
         <form
           onSubmit={addNewEmailToInvite}
-          className="flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-950 p-2.5"
+          className="flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-950 p-2.5 max-md:flex-col max-md:gap-4 max-md:border-none max-md:bg-transparent max-md:p-0"
         >
-          <div className="flex flex-1 items-center gap-2 px-2">
+          <div className="flex flex-1 items-center gap-2 px-2 max-md:w-full max-md:gap-0 max-md:rounded-lg max-md:border-zinc-800 max-md:bg-zinc-950">
             <AtSign className="size-5 text-zinc-400" />
             <input
               type="email"
               name="email"
               placeholder="Digite o email do convidado"
-              className="flex-1 bg-transparent text-lg placeholder-zinc-400 outline-none"
+              className="flex-1 bg-transparent text-lg placeholder-zinc-400 outline-none max-md:p-3"
             />
           </div>
 
-          <Button type="submit">
+          <Button size="responsive" type="submit">
             Convidar
             <Plus className="size-5" />
           </Button>
