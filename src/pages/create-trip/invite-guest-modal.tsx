@@ -20,15 +20,15 @@ export function InviteGuestsModal({
       <div className="shadow-shape w-[640px] space-y-5 rounded-xl bg-zinc-900 px-6 py-5">
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <h2 className="font-lg font-semibold">Selecionar convidados</h2>
+            <h2 className="font-lg font-semibold">Select guests</h2>
             <button>
               <X className="size-5 text-zinc-400" onClick={closeGuestsModal} />
             </button>
           </div>
 
           <p className="text-sm text-zinc-400">
-            Os convidados irão receber e-mails para confirmar a participação na
-            viagem.
+            Guests will receive emails to confirm their participation in the
+            trip.
           </p>
         </div>
 
@@ -62,13 +62,13 @@ export function InviteGuestsModal({
             <input
               type="email"
               name="email"
-              placeholder="Digite o email do convidado"
+              placeholder="Enter guest's email"
               className="flex-1 bg-transparent text-lg placeholder-zinc-400 outline-none max-md:p-3"
             />
           </div>
 
           <Button size="responsive" type="submit">
-            Convidar
+            Invite
             <Plus className="size-5" />
           </Button>
         </form>

@@ -107,17 +107,18 @@ export function CreateTripPage() {
   }
 
   return (
-    <div className="bg-pattern flex h-screen items-center justify-center bg-center bg-no-repeat">
+    <div className="bg-pattern flex h-screen items-center justify-center bg-[url('/bg.png')] bg-center bg-no-repeat">
       <div className="w-full max-w-3xl space-y-10 px-6 text-center">
         <div className="flex flex-col items-center gap-3">
           <img src="/logo.svg" alt="plann.er" />
           <p className="text-lg text-zinc-300">
-            Convide seus amigos e planeje sua próxima viagem!
+            Invite your friends and plan your next trip!
           </p>
         </div>
 
         <div className="space-y-4">
           <DestinationAndDateStep
+            destination={destination}
             closeGuestsInput={closeGuestsInput}
             isGuestsInputOpen={isGuestsInputOpen}
             openGuestsInput={openGuestsInput}
@@ -136,16 +137,15 @@ export function CreateTripPage() {
         </div>
 
         <p className="text-sm text-zinc-500">
-          Ao planejar sua viagem pela plann.er você automaticamente concorda{" "}
-          <br />
-          com nossos
+          By planning your trip with plann.er, you automatically agree <br />
+          to our{" "}
           <a className="text-zinc-300 underline" href="#">
-            termos de uso
-          </a>
-          e
+            terms of use
+          </a>{" "}
+          and{" "}
           <a className="text-zinc-300 underline" href="#">
-            políticas de privacidade
-          </a>
+            privacy policies
+          </a>{" "}
           .
         </p>
       </div>
@@ -161,6 +161,8 @@ export function CreateTripPage() {
 
       {isConfirmTripModalOpen && (
         <ConfirmTripModal
+          destination={destination}
+          eventStartAndEndDates={eventStartAndEndDates}
           closeConfirmTripModal={closeConfirmTripModal}
           createTrip={createTrip}
           setOwnerName={setOwnerName}

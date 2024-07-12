@@ -16,7 +16,7 @@ export function UpdateTripModal({
   trip,
   closeUpdateTripModal,
 }: UpdateTripModalProps) {
-  const { tripId } = useParams()
+  const { tripId } = useParams<{ tripId: string }>()
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
   const [eventStartAndEndDates, setEventStartAndEndDates] = useState<
     DateRange | undefined
@@ -68,10 +68,11 @@ export function UpdateTripModal({
     eventStartAndEndDates &&
     eventStartAndEndDates.from &&
     eventStartAndEndDates.to
-      ? format(eventStartAndEndDates.from, "d' de 'LLL")
-          .concat(" até ")
-          .concat(format(eventStartAndEndDates.to, "d' de 'LLL"))
-      : "Quando?"
+      ? format(eventStartAndEndDates.from, "d 'of' LLL")
+          .concat(" to ")
+          .concat(format(eventStartAndEndDates.to, "d 'of' LLL"))
+      : null
+
   return (
     <div
       className="fixed inset-0 flex items-center justify-center bg-black/60"
@@ -83,7 +84,7 @@ export function UpdateTripModal({
       >
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <h2 className="font-lg font-semibold">Alterar viagem</h2>
+            <h2 className="font-lg font-semibold">Update trip</h2>
             <button>
               <X
                 className="size-5 text-zinc-400"
@@ -93,7 +94,7 @@ export function UpdateTripModal({
           </div>
 
           <p className="text-sm text-zinc-400">
-            Ao alterar a data, você perderá suas atividades cadastradas.
+            When changing the date, you will lose your registered activities.
           </p>
         </div>
 
@@ -102,7 +103,7 @@ export function UpdateTripModal({
             <Tag className="size-5 text-zinc-400" />
             <input
               name="title"
-              placeholder="Para onde você vai?"
+              placeholder="Where are you going?"
               className="flex-1 bg-transparent text-lg placeholder-zinc-400 outline-none"
               value={formData.title}
               onChange={(e) =>
@@ -119,7 +120,7 @@ export function UpdateTripModal({
             >
               <Calendar className="size-5 text-zinc-400" />
               <span className="w-40 flex-1 text-lg text-zinc-400">
-                {displayedDate}
+                {displayedDate || "When?"}
               </span>
             </button>
           </div>
@@ -132,7 +133,7 @@ export function UpdateTripModal({
               <div className="shadow-shape space-y-5 rounded-xl bg-zinc-900 px-6 py-5">
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <h2 className="font-lg font-semibold">Selecione a data</h2>
+                    <h2 className="font-lg font-semibold">Select date</h2>
                     <button>
                       <X
                         className="size-5 text-zinc-400"
@@ -151,7 +152,7 @@ export function UpdateTripModal({
             </div>
           )}
 
-          <Button size="full">Salvar atividade</Button>
+          <Button size="full">Save activity</Button>
         </form>
       </div>
     </div>

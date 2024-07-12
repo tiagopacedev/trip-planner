@@ -3,7 +3,7 @@ import { api } from "../../lib/axios"
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { format } from "date-fns"
-import { ptBR } from "date-fns/locale"
+import { enUS } from "date-fns/locale"
 
 interface Activity {
   date: string
@@ -31,10 +31,10 @@ export function Activities() {
           <div key={category.date} className="space-y-2.5">
             <div className="flex items-baseline gap-2">
               <span className="text-xl font-semibold text-zinc-300">
-                Dia {format(category.date, "d")}
+                Day {format(new Date(category.date), "d")}
               </span>
               <span className="text-xs text-zinc-500">
-                {format(category.date, "EEEE", { locale: ptBR })}
+                {format(category.date, "EEEE", { locale: enUS })}
               </span>
             </div>
             {category.activities.length > 0 ? (
@@ -55,7 +55,7 @@ export function Activities() {
               </div>
             ) : (
               <p className="text-sm text-zinc-500">
-                Nenhuma atividade cadastrada nessa data.
+                No activities scheduled for this date.
               </p>
             )}
           </div>

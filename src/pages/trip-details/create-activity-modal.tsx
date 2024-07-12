@@ -38,7 +38,7 @@ export function CreateActivityModal({
       <div className="shadow-shape w-[640px] space-y-5 rounded-xl bg-zinc-900 px-6 py-5">
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <h2 className="font-lg font-semibold">Cadastrar atividade</h2>
+            <h2 className="font-lg font-semibold">Add Activity</h2>
             <button>
               <X
                 className="size-5 text-zinc-400"
@@ -48,7 +48,7 @@ export function CreateActivityModal({
           </div>
 
           <p className="text-sm text-zinc-400">
-            Todos convidados podem visualizar as atividades.
+            All guests can view the activities.
           </p>
         </div>
 
@@ -57,7 +57,7 @@ export function CreateActivityModal({
             <Tag className="size-5 text-zinc-400" />
             <input
               name="title"
-              placeholder="Qual a atividade?"
+              placeholder="What's the activity?"
               className="flex-1 bg-transparent text-lg placeholder-zinc-400 outline-none"
             />
           </div>
@@ -67,12 +67,12 @@ export function CreateActivityModal({
             <input
               type="datetime-local"
               name="occurs_at"
-              placeholder="Data e horário da atividade"
+              placeholder="Date and time of the activity"
               className="flex-1 bg-transparent text-lg placeholder-zinc-400 outline-none"
             />
           </div>
 
-          <Button size="full">Salvar atividade</Button>
+          <Button size="full">Save Activity</Button>
         </form>
       </div>
     </div>

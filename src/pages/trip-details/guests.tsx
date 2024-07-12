@@ -3,7 +3,7 @@ import { Button } from "../../components/button"
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { api } from "../../lib/axios"
-import { InviteParticipantModal } from "./invite-participant-modal"
+import { InviteGuestModal } from "./invite-guest-modal"
 
 interface Participant {
   id: string
@@ -13,9 +13,9 @@ interface Participant {
 }
 
 export function Guests() {
-  const { tripId } = useParams()
+  const { tripId } = useParams<{ tripId: string }>()
   const [participants, setParticipants] = useState<Participant[]>([])
-  const [isInviteParticipantLinkModalOpen, setIsInviteParticipantModalOpen] =
+  const [isInviteParticipantModalOpen, setIsInviteParticipantModalOpen] =
     useState(false)
 
   function openInviteParticipantModal() {
@@ -34,7 +34,7 @@ export function Guests() {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-xl font-semibold">Convidados</h2>
+      <h2 className="text-xl font-semibold">Guests</h2>
 
       <div className="space-y-5">
         {participants.map((participant, index) => (
@@ -44,7 +44,7 @@ export function Guests() {
           >
             <div className="space-y-1.5">
               <span className="block font-medium text-zinc-100">
-                {participant.name ?? `Convidado ${index}`}
+                {participant.name ?? `Guest ${index}`}
               </span>
               <span className="block truncate text-sm text-zinc-400">
                 {participant.email}
@@ -66,13 +66,11 @@ export function Guests() {
         onClick={openInviteParticipantModal}
       >
         <UserCog className="size-5" />
-        Gerenciar convidados
+        Manage Guests
       </Button>
 
-      {isInviteParticipantLinkModalOpen && (
-        <InviteParticipantModal
-          closeInviteParticipantModal={closeInviteParticipantModal}
-        />
+      {isInviteParticipantModalOpen && (
+        <InviteGuestModal closeInviteGuestModal={closeInviteParticipantModal} />
       )}
     </div>
   )

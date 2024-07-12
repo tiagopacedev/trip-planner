@@ -15,7 +15,7 @@ export interface Trip {
 }
 
 export function DestinationAndDateHeader() {
-  const { tripId } = useParams()
+  const { tripId } = useParams<{ tripId: string }>()
   const [trip, setTrip] = useState<Trip | undefined>()
   const [isUpdateLinkModalOpen, setIsUpdateLinkModalOpen] = useState(false)
 
@@ -34,11 +34,11 @@ export function DestinationAndDateHeader() {
   const displayedDate = trip
     ? isSameMonth(trip.starts_at, trip.ends_at)
       ? format(trip.starts_at, "d")
-          .concat(" até ")
-          .concat(format(trip.ends_at, "d' de 'LLL"))
-      : format(trip.starts_at, "d' de 'LLL")
-          .concat(" até ")
-          .concat(format(trip.ends_at, "d' de 'LLL"))
+          .concat(" to ")
+          .concat(format(trip.ends_at, "d 'of' LLL"))
+      : format(trip.starts_at, "d 'of' LLL")
+          .concat(" to ")
+          .concat(format(trip.ends_at, "d 'of' LLL"))
     : null
 
   return (
@@ -59,7 +59,7 @@ export function DestinationAndDateHeader() {
         <div className="h-6 w-px bg-zinc-800 max-md:hidden" />
 
         <Button variant="secondary" onClick={openUpdateLinkModal}>
-          <span className="max-md:hidden"> Alterar local/data</span>
+          <span className="max-md:hidden"> Change location/date</span>
           <Settings2 className="size-5 shrink-0" />
         </Button>
       </div>

@@ -37,7 +37,7 @@ export function ImportantLinks() {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-xl font-semibold">Links importantes</h2>
+      <h2 className="text-xl font-semibold">Important Links</h2>
 
       <div className="space-y-5">
         {links.map((link) => (
@@ -67,7 +67,7 @@ export function ImportantLinks() {
 
       <Button variant="secondary" size="full" onClick={openCreateLinkModal}>
         <Plus className="size-5" />
-        Cadastrar novo link
+        Add New Link
       </Button>
 
       {isCreateLinkModalOpen && (

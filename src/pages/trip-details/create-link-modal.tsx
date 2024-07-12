@@ -11,13 +11,12 @@ interface CreateLinkModalProps {
 export function CreateLinkModal({
   closeCreateLinkModal,
 }: CreateLinkModalProps) {
-  const { tripId } = useParams()
+  const { tripId } = useParams<{ tripId: string }>()
 
   async function createLink(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     const data = new FormData(event.currentTarget)
-
     const title = data.get("title")?.toString()
     const url = data.get("url")?.toString()
 
@@ -38,7 +37,7 @@ export function CreateLinkModal({
       <div className="shadow-shape w-[640px] space-y-5 rounded-xl bg-zinc-900 px-6 py-5">
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <h2 className="font-lg font-semibold">Cadastrar link</h2>
+            <h2 className="font-lg font-semibold">Create link</h2>
             <button>
               <X
                 className="size-5 text-zinc-400"
@@ -48,7 +47,7 @@ export function CreateLinkModal({
           </div>
 
           <p className="text-sm text-zinc-400">
-            Todos convidados podem visualizar os links importantes.
+            All guests can view important links.
           </p>
         </div>
 
@@ -57,7 +56,7 @@ export function CreateLinkModal({
             <Tag className="size-5 text-zinc-400" />
             <input
               name="title"
-              placeholder="Título do link"
+              placeholder="Link title"
               className="flex-1 bg-transparent text-lg placeholder-zinc-400 outline-none"
             />
           </div>
@@ -71,7 +70,7 @@ export function CreateLinkModal({
             />
           </div>
 
-          <Button size="full">Salvar link</Button>
+          <Button size="full">Save link</Button>
         </form>
       </div>
     </div>

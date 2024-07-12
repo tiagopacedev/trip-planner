@@ -4,32 +4,31 @@ import { FormEvent, useState } from "react"
 import { api } from "../../lib/axios"
 import { useParams } from "react-router-dom"
 
-interface InviteParticipantModalProps {
-  closeInviteParticipantModal: () => void
+interface InviteGuestModalProps {
+  closeInviteGuestModal: () => void
 }
 
-export function InviteParticipantModal({
-  closeInviteParticipantModal,
-}: InviteParticipantModalProps) {
-  const { tripId } = useParams()
-  const [isLoading, setisloading] = useState(false)
+export function InviteGuestModal({
+  closeInviteGuestModal,
+}: InviteGuestModalProps) {
+  const { tripId } = useParams<{ tripId: string }>()
+  const [isLoading, setIsLoading] = useState(false)
 
   async function addParticipant(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     const data = new FormData(event.currentTarget)
-
     const email = data.get("email")?.toString()
 
     if (!email) {
       return
     }
 
-    setisloading(true)
+    setIsLoading(true)
     await api.post(`/trips/${tripId}/invites`, {
       email,
     })
-    setisloading(false)
+    setIsLoading(false)
     window.document.location.reload()
   }
 
@@ -38,18 +37,18 @@ export function InviteParticipantModal({
       <div className="shadow-shape w-[640px] space-y-5 rounded-xl bg-zinc-900 px-6 py-5">
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <h2 className="font-lg font-semibold">Adicionar convidado</h2>
+            <h2 className="font-lg font-semibold">Add participant</h2>
             <button>
               <X
                 className="size-5 text-zinc-400"
-                onClick={closeInviteParticipantModal}
+                onClick={closeInviteGuestModal}
               />
             </button>
           </div>
 
           <p className="text-sm text-zinc-400">
-            Os convidados irão receber e-mails para confirmar a participação na
-            viagem.
+            Participants will receive emails to confirm their participation in
+            the trip.
           </p>
         </div>
 
@@ -58,14 +57,12 @@ export function InviteParticipantModal({
             <UserRoundPlus className="size-5 text-zinc-400" />
             <input
               name="email"
-              placeholder="Quem estará na viagem?"
+              placeholder="Who will be on the trip?"
               className="flex-1 bg-transparent text-lg placeholder-zinc-400 outline-none"
             />
           </div>
 
-          <Button size="full">
-            {isLoading ? "Convidando..." : " Convidar"}
-          </Button>
+          <Button size="full">{isLoading ? "Inviting..." : "Invite"}</Button>
         </form>
       </div>
     </div>
