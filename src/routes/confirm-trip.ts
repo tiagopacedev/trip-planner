@@ -58,24 +58,27 @@ export async function confirmTrip(app: FastifyInstance) {
 
           const message = await mail.sendMail({
             from: {
-              name: 'Team Journier',
-              address: 'team@jounier.er',
+              name: 'Team plann.er',
+              address: 'team@planner.com',
             },
             to: participant.email,
-            subject: `Confirme sua presença na viagem para ${trip.destination} em ${formattedStartDate}`,
+            subject: `Confirm your participation in the trip to ${trip.destination} on ${formattedStartDate}`,
             html: `
             <div style="font-family: sans-serif; font-size: 16px; line-height: 1.6;">
-              <p>Você foi convidado(a) para participar de uma viagem para <strong>${trip.destination}</strong> nas datas de <strong>${formattedStartDate}</strong> até <strong>${formattedEndDate}</strong>.</p>
+              <p>You have been invited to participate in a trip to <strong>${trip.destination}</strong> from <strong>${formattedStartDate}</strong> to <strong>${formattedEndDate}</strong>.</p>
               <p></p>
-              <p>Para confirmar sua presença na viagem, clique no link abaixo:</p>
+              <p>To confirm your participation in the trip, click the link below:</p>
               <p></p>
               <p>
-                <a href="${confirmationLink}">Confirmar viagem</a>
+                <a href="${confirmationLink}">Confirm trip</a>
               </p>
               <p></p>
-              <p>Caso você não saiba do que se trata esse e-mail, apenas ignore esse e-mail.</p>
+              <p>If you are unsure why you received this email, please disregard it.</p>
+              <p></p>
+              <p>Best regards,</p>
+              <p>Team plann.er</p>
             </div>
-          `.trim(),
+            `.trim(),
           })
 
           console.log(nodemailer.getTestMessageUrl(message))
